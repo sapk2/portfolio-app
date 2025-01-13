@@ -31,12 +31,32 @@
                         @if (Route::has('login'))
                             <nav class="-mx-3 flex flex-1 justify-end">
                                 @auth
+                                  @if(Auth::user()->role=='user')
                                     <a
-                                        href="{{ url('/dashboard') }}"
+                                        href="{{ route('users.dashboard') }}"
                                         class="rounded-md px-3 py-2 text-black ring-1 ring-transparent transition hover:text-black/70 focus:outline-none focus-visible:ring-[#FF2D20] dark:text-white dark:hover:text-white/80 dark:focus-visible:ring-white"
                                     >
                                         Dashboard
                                     </a>
+                                    @else
+                                    <div class="flex item-center">
+                                        <span class="rounded-md px-3 py-2 text-black ring-1 ring-transparent transition hover:text-black/70 focus:outline-none focus-visible:ring-[#FF2D20] dark:text-white dark:hover:text-white/80 dark:focus-visible:ring-white">
+                                            {{ Auth::user()->name }}
+                                        </span>
+                                    </div>
+                               
+                                    @endif
+                                    <form method="POST" action="{{ route('logout') }}">
+                                        @csrf
+
+                                        <a
+                                            href="{{ route('logout') }}"
+                                            onclick="event.preventDefault(); this.closest('form').submit();"
+                                            class="rounded-md px-3 py-2 text-black ring-1 ring-transparent transition hover:text-black/70 focus:outline-none focus-visible:ring-[#FF2D20] dark:text-white dark:hover:text-white/80 dark:focus-visible:ring-white"
+                                        >
+                                            Log out
+                                        </a>
+                                    </form>
                                 @else
                                     <a
                                         href="{{ route('login') }}"
