@@ -47,7 +47,7 @@ class Resumecontroller extends Controller
         }
         $data['pdf_path'] = str_replace('public/', 'storage/', $filePath);
         resume::create($data);
-        return redirect()->route('users.resumes.index')->with('sucess', 'Data saved successfully!');
+        return redirect()->route('users.resumes.index')->with('sucess', 'Data created successfully!!');
     }
 
     /**
