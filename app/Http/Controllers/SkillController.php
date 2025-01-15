@@ -17,7 +17,7 @@ class SkillController extends Controller
     }
     public function store(Request $request){
         $validated=$request->validate([
-            'name'=>'requried',
+            'name'=>'required',
             'proficiency'=>'required'
         ]);
         skill::create($validated);
@@ -25,8 +25,8 @@ class SkillController extends Controller
     }
     public function edit($id)
     {
-        $skill = Skill::findOrFail($id); // Find the skill by ID
-        return view('portfolio.edit_skill', compact('skill'));
+        $skills = Skill::findOrFail($id); // Find the skill by ID
+        return view('users.skills.edit', compact('skills'));
     }
     public function update(Request $request, $id)
     {
@@ -34,8 +34,8 @@ class SkillController extends Controller
             'name' => 'required',
             'proficiency' => 'required',
         ]);
-        $skill = Skill::findOrFail($id);
-        $skill->update($validated);
+        $skills = Skill::findOrFail($id);
+        $skills->update($validated);
         return redirect()->route('users.skills.index')->with('success', 'Skill updated successfully!');
     }
     public function delete($id)

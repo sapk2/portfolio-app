@@ -37,8 +37,8 @@
                 <li><a href="{{ route('users.projects.index') }}" class="block hover:bg-red-700 p-4 rounded-lg font-bold text-xl">Project</a></li>
                 <li><a href="{{route('users.image-gallery')}}" class="block hover:bg-red-700 p-4 rounded-lg font-bold text-xl">Image</a></li>
                 <li><a href="{{route('users.skills.index')}}" class="block hover:bg-red-700 p-4 rounded-lg font-bold text-xl">Skills</a></li>
-                <li><a href="#" class="block hover:bg-red-700 p-4 rounded-lg font-bold text-xl">About</a></li>
-                <li><a href="#" class="block hover:bg-red-700 p-4 rounded-lg font-bold text-xl">Contact</a></li>
+                <li><a href="{{route('users.aboutme.index')}}" class="block hover:bg-red-700 p-4 rounded-lg font-bold text-xl">About</a></li>
+                <li><a href="{{route('users.contacts.index')}}" class="block hover:bg-red-700 p-4 rounded-lg font-bold text-xl">Contact</a></li>
                 <li><a href="{{route('users.manageusers.index')}}" class="block hover:bg-red-700 p-4 rounded-lg font-bold text-xl">Users</a></li>
                 <li>
                     <form action="{{ route('logout') }}" method="POST" class="block py-2 px-4 hover:bg-red-700 rounded">

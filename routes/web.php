@@ -1,14 +1,17 @@
 <?php
 
+use App\Http\Controllers\AboutController;
+use App\Http\Controllers\ContactMecontroller;
 use App\Http\Controllers\Dashboardcontroller;
 use App\Http\Controllers\ImageGalleryController;
+use App\Http\Controllers\Pagecontroller;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\Projectcontroller;
 use App\Http\Controllers\Resumecontroller;
 use App\Http\Controllers\SkillController;
 use App\Http\Controllers\Userscontroller;
 use App\Http\Middleware\isuser;
-use App\Models\resume;
+use App\Models\resume; 
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -53,7 +56,14 @@ Route::delete('image-gallery/{id}', [ImageGalleryController::class, 'destroy']);
     Route::post('user/{id}/update', [Userscontroller::class, 'update'])->name('users.manageusers.update');
     Route::get('user/{id}/delete', [Userscontroller::class, 'delete'])->name('users.manageusers.delete');
 
-
+    /******************about me*******************/
+    Route::get('/users/aboutme',[AboutController::class,'index'])->name('users.aboutme.index');
+    Route::put('/users/aboutme',[AboutController::class,'update'])->name('users.aboutme.update');
+    
+    /*************************contactme***************************************** */
+    Route::get('/contact',[Pagecontroller::class,'contact'])->name('contact');
+    Route::get('/users/contacts',[ContactMecontroller::class,'show'])->name('users.contacts.index');
+    Route::post('/contact/store',[ContactMecontroller::class,'store'])->name('contact.store');
 });
 
 require __DIR__ . '/auth.php';

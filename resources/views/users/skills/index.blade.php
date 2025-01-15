@@ -5,31 +5,43 @@
         <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg">
             <div class="p-6 text-gray-900 dark:text-gray-100">
                 <div class="relative overflow-x-auto shadow-md sm:rounded-lg">
-                    <h1 class="text-3xl font-bold">Skills</h1>
+                    <h1 class="text-3xl font-bold mb-4">Skills</h1>
                     <hr class="h-1 bg-emerald-500">
-                    <div class="flex justify-end mt-2">
-                        <a href="{{route('users.skills.create')}}" class="bg-blue-600 text-white px-4 py-2 rounded">create</a>
+                    <div class="flex justify-end mt-4">
+                        <a href="{{ route('users.skills.create') }}" 
+                           class="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700 transition" 
+                           aria-label="Create Skill">
+                            Create
+                        </a>
                     </div>
                     <div class="mt-6">
-                        
-                        <table id="mytable"  class=" display text-xs text-gray-700 uppercase flex justify-center bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+                        <table id="mytable" class="w-full text-sm text-gray-700 text-center bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
                             <thead>
-                                    <tr>
-                                        <th class=" border px-6 py-3" >SN</th>
-                                        <th class=" border px-6 py-3" >Name</th>
-                                        <th class=" border px-6 py-3" >Proficiency</th>
-                                        <th class=" border px-6 py-3" >action</th>
-                                    </tr>
+                                <tr class="text-center">
+                                    <th scope="col" class="border px-6 py-3">SN</th>
+                                    <th scope="col" class="border px-6 py-3">Name</th>
+                                    <th scope="col" class="border px-6 py-3">Proficiency</th>
+                                    <th scope="col" class="border px-6 py-3">Action</th>
+                                </tr>
                             </thead>
                             <tbody>
-                                @foreach ($skills as $skills)
-                                    <tr>
-                                        <td class="px-6 py-4">{{$loop->index +1}}</td>
-                                        <td class="px-6 py-4">{{$skills->name}}</td>
-                                        <td class="px-6 py-2">{{$skills->proficiency}}</td>
-                                        <td>
-                                            <a href="{{route('users.skills.edit',$skills->id)}}" class="bg-blue-600 text-white px-4 py-2 rounded-lg">Edit</a>
-                                            <a href="{{route('users.skills.delete',$skills->id)}}"onclick="return confirm('Are you sure to Delete?')" class="bg-red-600 text-white px-4 py-2 rounded-lg">Delete</a>
+                                @foreach ($skills as $skill)
+                                    <tr class=" text-center bg-white dark:bg-gray-800 hover:bg-gray-100 dark:hover:bg-gray-700">
+                                        <td class=" text-center border px-6 py-4">{{ $loop->iteration }}</td>
+                                        <td class="border px-6 py-4">{{ $skill->name }}</td>
+                                        <td class="border px-6 py-4">{{ $skill->proficiency }}</td>
+                                        <td class="border px-6 py-4 flex space-x-2">
+                                            <a href="{{ route('users.skills.edit', $skill->id) }}" 
+                                               class="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700 transition" 
+                                               aria-label="Edit Skill">
+                                                Edit
+                                            </a>
+                                            <a href="{{ route('users.skills.delete', $skill->id) }}" 
+                                               onclick="return confirm('Are you sure you want to delete this skill?')" 
+                                               class="bg-red-600 text-white px-4 py-2 rounded hover:bg-red-700 transition" 
+                                               aria-label="Delete Skill">
+                                                Delete
+                                            </a>
                                         </td>
                                     </tr>
                                 @endforeach
@@ -41,4 +53,9 @@
         </div>
     </div>
 </div>
+<script>
+     $(document).ready(function() {
+                    $('#mytable').DataTable();
+                });
+</script>
 @endsection
