@@ -14,7 +14,7 @@
     <link rel="stylesheet" href="https://cdn.datatables.net/2.2.1/css/dataTables.dataTables.min.css" />
 
     <!-- JS Libraries -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js" integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
     <script src="https://cdn.datatables.net/2.2.1/js/dataTables.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script src="//unpkg.com/alpinejs" defer></script>
@@ -35,11 +35,11 @@
                 <li><a href="{{ route('users.dashboard') }}" class="block hover:bg-red-700 p-4 rounded-lg font-bold text-xl">Dashboard</a></li>
                 <li><a href="{{ route('users.resumes.index') }}" class="block hover:bg-red-700 p-4 rounded-lg font-bold text-xl">Resume</a></li>
                 <li><a href="{{ route('users.projects.index') }}" class="block hover:bg-red-700 p-4 rounded-lg font-bold text-xl">Project</a></li>
-                <li><a href="{{route('users.image-gallery')}}" class="block hover:bg-red-700 p-4 rounded-lg font-bold text-xl">Image</a></li>
-                <li><a href="{{route('users.skills.index')}}" class="block hover:bg-red-700 p-4 rounded-lg font-bold text-xl">Skills</a></li>
-                <li><a href="{{route('users.aboutme.index')}}" class="block hover:bg-red-700 p-4 rounded-lg font-bold text-xl">About</a></li>
-                <li><a href="{{route('users.contacts.index')}}" class="block hover:bg-red-700 p-4 rounded-lg font-bold text-xl">Contact</a></li>
-                <li><a href="{{route('users.manageusers.index')}}" class="block hover:bg-red-700 p-4 rounded-lg font-bold text-xl">Users</a></li>
+                <li><a href="{{ route('users.image-gallery') }}" class="block hover:bg-red-700 p-4 rounded-lg font-bold text-xl">Image</a></li>
+                <li><a href="{{ route('users.skills.index') }}" class="block hover:bg-red-700 p-4 rounded-lg font-bold text-xl">Skills</a></li>
+                <li><a href="{{ route('users.aboutme.index') }}" class="block hover:bg-red-700 p-4 rounded-lg font-bold text-xl">About</a></li>
+                <li><a href="{{ route('users.contacts.index') }}" class="block hover:bg-red-700 p-4 rounded-lg font-bold text-xl">Contact</a></li>
+                <li><a href="{{ route('users.manageusers.index') }}" class="block hover:bg-red-700 p-4 rounded-lg font-bold text-xl">Users</a></li>
                 <li>
                     <form action="{{ route('logout') }}" method="POST" class="block py-2 px-4 hover:bg-red-700 rounded">
                         @csrf
@@ -66,6 +66,46 @@
         </div>
     </div>
 
+    <!-- SweetAlert Global Function -->
+    <script>
+        function showAlert(type, title, message) {
+            Swal.fire({
+                icon: type,
+                title: title,
+                text: message,
+                confirmButtonText: 'OK',
+                timer: 3000
+            });
+        }
+
+        // Automatically show success/error message from session
+        document.addEventListener('DOMContentLoaded', function () {
+            @if (session('success'))
+                showAlert('success', 'Success', '{{ session('success') }}');
+            @endif
+
+            @if (session('error'))
+                showAlert('error', 'Error', '{{ session('error') }}');
+            @endif
+        });
+
+        function confirmDelete(url) {
+            Swal.fire({
+                title: "Are you sure?",
+                text: "You won't be able to revert this!",
+                icon: "warning",
+                showCancelButton: true,
+                confirmButtonColor: "#d33",
+                cancelButtonColor: "#3085d6",
+                confirmButtonText: "Yes, delete it!"
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    window.location.href = url; // Or use AJAX to delete
+                }
+            });
+        }
+    </script>
+
     <!-- Sidebar Toggle Script -->
     <script>
         const sidebar = document.getElementById('sidebar');
@@ -74,7 +114,6 @@
         const toggleButton = document.getElementById('toggleButton');
         const closeSidebar = document.getElementById('closeSidebar');
 
-        // Function to open the sidebar
         function openSidebar() {
             sidebar.classList.remove('-translate-x-full');
             overlay.classList.remove('hidden');
@@ -82,7 +121,6 @@
             mainContent.classList.add('blur-sm');
         }
 
-        // Function to close the sidebar
         function closeSidebarFunction() {
             sidebar.classList.add('-translate-x-full');
             overlay.classList.add('hidden');
@@ -90,15 +128,10 @@
             mainContent.classList.remove('blur-sm');
         }
 
-        // Open the sidebar when the toggle button is clicked
         toggleButton.addEventListener('click', openSidebar);
-
-        // Close the sidebar when the close button is clicked
         closeSidebar.addEventListener('click', closeSidebarFunction);
-
-        // Close the sidebar when clicking outside the sidebar
         overlay.addEventListener('click', closeSidebarFunction);
     </script>
-</body>
 
+</body>
 </html>

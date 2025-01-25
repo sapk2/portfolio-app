@@ -22,19 +22,7 @@
                     </button>
                 </div>
                 @endif
-                @if (session('success'))
-                <script>
-                    document.addEventListener('DOMContentLoaded', function () {
-                        Swal.fire({
-                            icon: 'success',
-                            title: 'Success',
-                            text: '{{ session('sucess') }}',
-                            confirmButtonText: 'OK',
-                            timer: 3000
-                        });
-                    });
-                </script>
-                @endif
+               
 
                 <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
                     <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg">
